@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Jquery-mobile-events : A collection of mobile event plugins for jQuery." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Jquery-mobile-events</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/benmajor/jQuery-Mobile-Events">View on GitHub</a>
+
+          <h1 id="project_title">Jquery-mobile-events</h1>
+          <h2 id="project_tagline">A collection of mobile event plugins for jQuery.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/benmajor/jQuery-Mobile-Events/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/benmajor/jQuery-Mobile-Events/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>jQuery Mobile Events</h1>
+
+<p>This is a series of plugins that create additional events that can be used in combination with jQuery when developing for mobile devices. The events are also compatible with desktop browsers to ensure ultimate compatibility for your projects. In time, we will update the Repository to include some very basic demos to get you started with using the events, but for now, we've put together a list of the events that are provided, and what they do.</p>
+
+<p>As explained, the events are each triggered by native touch events, or alternatively by click events. The plugin automatically detects whether the user's device is touch compatible, and will use the correct native events whenever required. It is hoped that these events will help to aid single-environment development with jQuery for mobile web app development.</p>
+
+<h2>Events Provided:</h2>
+
+<ul>
+<li>
+<strong>tapstart</strong><br>
+Fired as soon as the user begins touching an element (or clicking, for desktop environments).</li>
+<li>
+<strong>tapend</strong><br>
+Fired after the user releases their finger from the target element (or releases their mouse button on desktops).</li>
+<li>
+<strong>tap</strong><br>
+This event is fired whenever the user taps and releases their finger on the target element. Caution should be observed when using this event in conjuction without tap events, especially <code>doubletap</code>. This event will be fired twice when <code>doubletap</code> is used, so it is recommended to use <code>singletap</code> in this case.</li>
+<li>
+<strong>singletap</strong><br>
+Unlike <code>tap</code> this event is only triggered once we are certain the user has only tapped the target element a single time. This will not be triggered by <code>doubletap</code> or <code>taphold</code>, unlike <code>tap</code>. Since we need to run some tests to make sure the user isn't double tapping or holding a tap on the target element, this event is fired with a short delay (currently of 500 milliseconds).</li>
+<li>
+<strong>doubletap</strong><br>
+Triggered whenever the user double taps on the target element. The threshold (time between taps) is currently set at 500 milliseconds.</li>
+<li>
+<strong>taphold</strong><br>
+This event is triggered whenever the user taps on the target element and leaves their finger on the element for at least <em>750 milliseconds</em>.</li>
+<li>
+<strong>swipe</strong><br>
+This is called whenever the user swipes their finger on the target element. It is not direction-dependent, and is fired regardless of the direction the user swiped.</li>
+<li>
+<strong>swipeup</strong><br>
+Similar to <code>swipe</code>, except only called when the user swipes their finger in an upward direction on the target element (i.e. bottom to top)</li>
+<li>
+<strong>swiperight</strong><br>
+Similar to <code>swipe</code>, but triggered only when the user swipes their finger left to right on the target element.</li>
+<li>
+<strong>swipedown</strong><br>
+Similar to <code>swipe</code>, but triggered only when the user swipes their finger top to bottom on the target element.</li>
+<li>
+<strong>swipeleft</strong><br>
+Similar to <code>swipe</code>, but triggered only when the user swipes their finger from right to left.</li>
+<li>
+<strong>scrollstart</strong><br>
+Triggered as soon as scrolling begins on the target element.</li>
+<li>
+<strong>scrollend</strong><br>
+Triggered as soon as scrolling is stopped on the target element.</li>
+<li>
+<strong>orientationchange</strong><br>
+This event is triggered when the orientiation of the device is changed. Please note that it uses throttling for non-mobile devices, or devices which do not support the native <code>orientationchange</code> event. In the latter instance, a detection of the viewport size change occurs.</li>
+</ul><h2>Usage:</h2>
+
+<p>All of the events outlined above have been written using jQuery's <code>event.special</code> object, and so can be used in conjuction with jQuery's event handling functions, as well as shortcut wrappers.</p>
+
+<p><strong>Binding a <code>tap</code> event to an element:</strong><br><code>$('#myElement').bind('tap', function(e) { console.log('User tapped #myElement'); });</code></p>
+
+<p><strong>Using with <code>.on()</code> and <code>.live()</code>:</strong><br><code>$('#myElement').live('tap', function(e) { console.log('User tapped #myElement'); });</code><br><code>$('#myElement').on('tap', function(e) { console.log('User tapped #myElement'); });</code></p>
+
+<p><strong>Triggering the event:</strong><br><code>$('#myElement').trigger('tap');</code></p>
+
+<p><strong>Removing the event with <code>.off()</code>, <code>.die()</code> and <code>.unbind()</code>:</strong><br><code>$('#myElement').off('tap', hander);</code><br><code>$('#myElement').die('tap', hander);</code><br><code>$('#myElement').unbind('tap', hander);</code></p>
+
+<p><strong>Using method wrapper:</strong><br><code>$('#myElement').tap(function(e) { console.log('User tapped #myElement'); });</code></p>
+
+<p><strong>Method chaining:</strong><br>
+Chaining has also been preserved, so you can easily use these events in conjuction with other jQuery functions, or attach multiple events in a single, chained LOC:<br><code>$('#myElement').singletap(function() { console.log('singletap'); }).doubletap(function() { console.log('doubletap'); });</code></p>
+
+<h2>Defining Thresholds:</h2>
+
+<p>You can also define custom thresholds to be used for <code>swipe</code> events (<code>swipeup</code>, <code>swiperight</code>, <code>swipedown</code> and <code>swipeleft</code>) to prevent interference with scrolling and other events. To do so, simply assign a <code>data-xthreshold</code> or <code>date-ythreshold</code> to the target element as follows:</p>
+
+<p><code>&lt;div id="mySwiper" data-xthreshold="500"&gt;&lt;/div&gt;</code></p>
+
+<p>The value you define is the difference in pixels that the user must move before the event is triggered on the target element. If no threshold is defined, a default of 50px will be used. </p>
+
+<p><code>data-xthreshold</code> defines the horizontal threshold.</p>
+
+<p><code>data-ythreshold</code> defines the vertical threshold.</p>
+
+<h2>Requirements:</h2>
+
+<p>The library works with jQuery 1.7.0+. All major browsers have been tested without problem. </p>
+
+<p>It should be noted that since 17.x.x, Google Chrome reports support for touch-based events, even if the device itself doesn't. This cause a rewrite of our sniffing technique, as the library was firing touch events which were supported by the browser, but no the client's hardware. It will be necessary to monitor the situation in the future, as there is currently an option switch to disable support for touch events in desktop versions of Chrome. Please make thorough tests when debugging in Chrome under Windows 8.</p>
+
+<h2>License:</h2>
+
+<p>Licensed under the MIT License:</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Jquery-mobile-events maintained by <a href="https://github.com/benmajor">benmajor</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
