@@ -50,11 +50,11 @@
             touch_capable: touchCapable,
             orientation_support: ('orientation' in window && 'onorientationchange' in window),
 
-            startevent:  (touch_capable) ? 'touchstart' : 'mousedown',
-            endevent:    (touch_capable) ? 'touchend' : 'mouseup',
-            moveevent:   (touch_capable) ? 'touchmove' : 'mousemove',
-            tapevent:    (touch_capable) ? 'tap' : 'click',
-            scrollevent: (touch_capable) ? 'touchmove' : 'scroll',
+            startevent:  (touchCapable) ? 'touchstart' : 'mousedown',
+            endevent:    (touchCapable) ? 'touchend' : 'mouseup',
+            moveevent:   (touchCapable) ? 'touchmove' : 'mousemove',
+            tapevent:    (touchCapable) ? 'tap' : 'click',
+            scrollevent: (touchCapable) ? 'touchmove' : 'scroll',
 
             hold_timer: null,
             tap_timer: null
