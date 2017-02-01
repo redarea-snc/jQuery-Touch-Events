@@ -35,11 +35,8 @@
     // The reason that we need to do this is because Chrome annoyingly
     // purports support for touch events even if the underlying hardware
     // does not!
-    var agent = navigator.userAgent.toLowerCase(),
-		isChrome = /chrome/i.exec(agent),
-		isAndroid = /android/i.exec(agent),
-		touchCapable = 'ontouchstart' in window && !(isChrome && !isAndroid),
-		
+    var touchCapable = ('ontouchstart' in window),
+	
         settings = {
             tap_pixel_range: 5,
             swipe_h_threshold: 50,
