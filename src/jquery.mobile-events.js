@@ -58,13 +58,13 @@
         };
     
     // Convenience functions:
-    $.isTouchCapable = function() { return settings.touch_capable;     };
-    $.getStartEvent  = function() { return settings.startevent;        };
-    $.getEndEvent    = function() { return settings.endevent;          };
-    $.getMoveEvent   = function() { return settings.moveevent;         };
-    $.getTapEvent    = function() { return settings.tapevent;          };
-    $.getScrollEvent = function() { return settings.scrollevent;       };
-    $.setSetting     = function(name, value) { settings[name] = value; };
+    $.isTouchCapable  = function() { return settings.touch_capable;     };
+    $.getStartEvent   = function() { return settings.startevent;        };
+    $.getEndEvent     = function() { return settings.endevent;          };
+    $.getMoveEvent    = function() { return settings.moveevent;         };
+    $.getTapEvent     = function() { return settings.tapevent;          };
+    $.getScrollEvent  = function() { return settings.scrollevent;       };
+    $.setTouchSetting = function(name, value) { settings[name] = value; };
     
     // Add Event shortcuts:
     $.each(['tapstart', 'tapend', 'tapmove', 'tap', 'tap2', 'tap3', 'tap4', 'singletap', 'doubletap', 'taphold', 'swipe', 'swipeup', 'swiperight', 'swipedown', 'swipeleft', 'swipeend', 'scrollstart', 'scrollend', 'orientationchange'], function (i, name) {
