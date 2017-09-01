@@ -495,6 +495,9 @@
 					
                     for( var i = 0; i < touches.length; i++)
                     {
+		    	if (settings.touch_capable && !origEvent.changedTouches[i])
+			    continue;
+			    
                         var touch = {
                             'position': {
                                 'x': (settings.touch_capable) ? origEvent.changedTouches[i].screenX : e.screenX,
